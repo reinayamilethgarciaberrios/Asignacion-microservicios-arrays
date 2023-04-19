@@ -1,6 +1,7 @@
 const express = require("express"); // importa Express
 const router = express.Router(); // crea un nuevo enrutador de Express
 const data = require("../../data/data-library"); // importa los datos de data-library
+const fetch = require("node-fetch");
 
 const logger = (message) => console.log(`Author Services: ${message}`);
 
@@ -34,22 +35,73 @@ router.get("/title/:title", (req, res) => {
   
   return res.send(response); // devuelve la respuesta al cliente
 });
-
-
-router.get("/author/:id", (req, res) => {
-  const url = "http://authors:3000/api/v2/authors/"+ req.params.id;
+/*---------------------------------------------------------------------*/ 
+router.get("/author/:name", async (req, res) => {
+  const url = "http://authors:3000/api/v2/authors/author/";
+  const name = req.params.name;
+  const json = await fetch(url+name).then(response => response.json())
   const titles = data.dataLibrary.books.filter((title) => {
-    return title.title.includes(req.params.title);
+    return title.authorid === json.data[0].id;
   });
   const response = {
-    service: "books",
-    architecture: "microservices",
-    url: url
+    service: "Busqueda por nombre",
+    titulos: titles
   };
-
-  
   return res.send(response); // devuelve la respuesta al cliente
 });
+/*---------------------------------------------------------------------*/ 
+router.get("/fechas", async (req, res) => {
+  const fechaUno = req.query.fechaUno;
+  const fechaDos = req.query.fechaDos;
+  const fecha = data.dataLibrary.books.filter((fecha) =>{
+   return fecha.year >= fechaUno && fecha.year <= fechaDos
+  })
+  const response = {
+    service: "Busqueda por Años",
+    Libros: fecha
+  };
+  return res.send(response); // devuelve la respuesta al cliente
+});
+
+/*---------------------------------------------------------------------*/ 
+router.get("/fechaMayorA", async (req, res) => {
+  const fechaMayor = req.query.fechaMayor;
+  const fecha = data.dataLibrary.books.filter((fecha) =>{
+   return fecha.year >= fechaMayor
+  })
+  const response = {
+    service: "Busqueda por fecha mayor A",
+    Libros: fecha
+  };
+  return res.send(response); // devuelve la respuesta al cliente
+});
+
+/*---------------------------------------------------------------------*/ 
+router.get("/fechaMenorA", async (req, res) => {
+  const fechaMenor = req.query.fechaMenor;
+  const fecha = data.dataLibrary.books.filter((fecha) =>{
+   return fecha.year <= fechaMenor
+  })
+  const response = {
+    service: "Busqueda por fecha menor A",
+    Libros: fecha
+  };
+  return res.send(response); // devuelve la respuesta al cliente
+});
+
+/*---------------------------------------------------------------------*/ 
+router.get("/fechaIgualA", async (req, res) => {
+  const fechaIgual = req.query.fechaIgual;
+  const fecha = data.dataLibrary.books.filter((fecha) =>{
+   return fecha.year <= fechaIgual
+  })
+  const response = {
+    service: "Busqueda por fecha igual A",
+    Libros: fecha
+  };
+  return res.send(response); // devuelve la respuesta al cliente
+});
+
 module.exports = router; // exporta el enrutador de Express para su uso en otras partes de la aplicación
 
 /*
