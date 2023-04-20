@@ -25,5 +25,54 @@ router.get("/", (req, res) => {
   return res.send(response);
 });
 
+/*---------------------------------------------------------------------*/ 
+router.get("/capital/:capital", (req, res) =>{
+
+  const capital = req.params.capital;
+  const pais = Object.values(data.dataLibrary.countries).find((pais)=>{
+    return pais.capital === capital;
+  })
+
+  const response={
+    service: "Busqueda del pais con la capital: "+capital,
+    data: pais
+  };
+   return res.send(response);
+});
+
+/*---------------------------------------------------------------------*/ 
+router.get("/pais/:capital", async (req, res) =>{
+  const url = "http://authors:3000/api/v2/authors/pais/";
+  const capital = req.params.capital;
+  const pais = Object.values(data.dataLibrary.countries).find((pais)=>{
+    return pais.capital === capital;
+  });
+
+  const author = await fetch(url+pais.name).then(response => response.json());
+
+  const response={
+    service: "Busqueda de authores nacidos en: "+pais.name,
+    data: author
+  };
+   return res.send(response);
+});
+
+/*---------------------------------------------------------------------*/ 
+router.get("/books/:capital", async (req, res) =>{
+  const url = "http://books:4000/api/v2/books/pais/";
+  const capital = req.params.capital;
+  const pais = Object.values(data.dataLibrary.countries).find((pais)=>{
+    return pais.capital === capital;
+  });
+
+  const books = await fetch(url+pais.name).then(response => response.json());
+
+  const response={
+    service: "Libros distribuidos en el pais: "+pais.name,
+    data: books
+  };
+   return res.send(response);
+});
+
 // Exportamos el router
 module.exports = router;

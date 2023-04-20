@@ -58,6 +58,18 @@ router.get("/author/:name", (req, res) => {
   // Enviamos la respuesta
   return res.send(response);
 });
+/*---------------------------------------------------------------------*/ 
+router.get("/pais/:pais", (req, res) =>{
+
+const pais = req.params.pais;
+const author = data.dataLibrary.authors.filter((author)=>{
+  return author.country.includes(pais);
+})
+  const response ={
+    author: author
+  };
+   return res.send(response);
+})
 
 // Exportamos el objeto Router
 module.exports = router;
