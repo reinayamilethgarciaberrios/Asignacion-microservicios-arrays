@@ -36,12 +36,20 @@ router.get("/title/:title", (req, res) => {
   return res.send(response); // devuelve la respuesta al cliente
 });
 /*---------------------------------------------------------------------*/ 
+// Se define una ruta GET en el router que espera un parámetro 'name'
 router.get("/author/:name", async (req, res) => {
+  // Se define la URL del servicio que se desea consultar
   const url = "http://authors:3000/api/v2/authors/author/";
+  // Se obtiene el valor del parámetro 'name' de la solicitud entrante
   const name = req.params.name;
+   // Se consulta un servicio externo para obtener la información del autor con el nombre indicado en el parámetro
   const json = await fetch(url+name).then(response => response.json())
+  // Se utiliza el método 'filter' para buscar en el objeto 'dataLibrary' 
+  //los títulos de libros que corresponden al autor encontrado en el servicio externo
   const titles = data.dataLibrary.books.filter((title) => {
     return title.authorid === json.data[0].id;
+    // Se crea un objeto de respuesta que contiene la información del servicio realizado
+     // y la información de los títulos de libros encontrados
   });
   const response = {
     service: "Busqueda por nombre",
@@ -93,7 +101,7 @@ router.get("/fechaMenorA", async (req, res) => {
 router.get("/fechaIgualA", async (req, res) => {
   const fechaIgual = req.query.fechaIgual;
   const fecha = data.dataLibrary.books.filter((fecha) =>{
-   return fecha.year <= fechaIgual
+   return fecha.year === fechaIgual
   })
   const response = {
     service: "Busqueda por fecha igual A",

@@ -25,54 +25,88 @@ router.get("/", (req, res) => {
   return res.send(response);
 });
 
-/*---------------------------------------------------------------------*/ 
-router.get("/capital/:capital", (req, res) =>{
+/*---------------------------------------------------------------------*/
+// Se define una ruta GET en el router que espera un parametro 'capital'
+router.get("/capital/:capital", (req, res) => {
 
+  // Se obtiene el valor del parametro 'capital' de la solicitud entrante
   const capital = req.params.capital;
-  const pais = Object.values(data.dataLibrary.countries).find((pais)=>{
+
+  // Se utiliza el metodo 'find' para buscar en el objeto 'dataLibrary'
+  // la informacion del pais que tenga la capital indicada en el parametro
+  const pais = Object.values(data.dataLibrary.countries).find((pais) => {
     return pais.capital === capital;
   })
-
-  const response={
-    service: "Busqueda del pais con la capital: "+capital,
+  // Se crea un objeto de respuesta
+  // que contiene la informacion del servicio realizado y la informacion del pais encontrado
+  const response = {
+    service: "Busqueda del pais con la capital: " + capital,
     data: pais
   };
-   return res.send(response);
+  // Se envia la respuesta al cliente
+  return res.send(response);
 });
 
-/*---------------------------------------------------------------------*/ 
-router.get("/pais/:capital", async (req, res) =>{
+/*---------------------------------------------------------------------*/
+// Se define una ruta GET en el router que espera un parámetro 'capital'
+router.get("/pais/:capital", async (req, res) => {
+  // Se define la URL del servicio que se desea consultar 
   const url = "http://authors:3000/api/v2/authors/pais/";
+  // Se obtiene el valor del parámetro 'capital' de la solicitud entrante
   const capital = req.params.capital;
-  const pais = Object.values(data.dataLibrary.countries).find((pais)=>{
+  // Se utiliza el método 'find' para buscar en el objeto 'dataLibrary'
+  // la información del país que tenga la capital indicada en el parámetro
+  const pais = Object.values(data.dataLibrary.countries).find((pais) => {
     return pais.capital === capital;
   });
-
-  const author = await fetch(url+pais.name).then(response => response.json());
-
-  const response={
-    service: "Busqueda de authores nacidos en: "+pais.name,
+  // Se consulta un servicio externo para obtener la información de autores nacidos en el país encontrado
+  const author = await fetch(url + pais.name).then(response => response.json());
+  // Se crea un objeto de respuesta que contiene la información del servicio realizado
+  // y la información de los autores encontrados
+  const response = {
+    service: "Busqueda de authores nacidos en: " + pais.name,
     data: author
   };
-   return res.send(response);
+  // Se envia la respuesta al cliente
+  return res.send(response);
 });
 
-/*---------------------------------------------------------------------*/ 
-router.get("/books/:capital", async (req, res) =>{
+/*---------------------------------------------------------------------*/
+// Se define una ruta GET en el router que espera un parámetro 'capital'
+router.get("/books/:capital", async (req, res) => {
+  // Se define la URL del servicio que se desea consultar
   const url = "http://books:4000/api/v2/books/pais/";
+  // Se obtiene el valor del parámetro 'capital' de la solicitud entrante
   const capital = req.params.capital;
-  const pais = Object.values(data.dataLibrary.countries).find((pais)=>{
+  // Se utiliza el método 'find' para buscar en el objeto 'dataLibrary' 
+  //la información del país que tenga la capital indicada en el parámetro
+  const pais = Object.values(data.dataLibrary.countries).find((pais) => {
     return pais.capital === capital;
   });
-
-  const books = await fetch(url+pais.name).then(response => response.json());
-
-  const response={
-    service: "Libros distribuidos en el pais: "+pais.name,
+ // Se consulta un servicio externo para obtener la información de libros distribuidos en el país encontrado
+  const books = await fetch(url + pais.name).then(response => response.json());
+ // Se crea un objeto de respuesta que contiene la información del servicio realizado 
+ //y la información de los libros encontrados
+  const response = {
+    service: "Libros distribuidos en el pais: " + pais.name,
     data: books
   };
-   return res.send(response);
+  // Se envía la respuesta al cliente
+  return res.send(response);
 });
+
+router.get("/lenguaje/:pais", (req, res) =>{
+   const lenguaje = req.params.pais;
+   const paises = Object.values(data.dataLibrary.countries).filter(pais =>{
+    return pais.languages.includes(lenguaje)
+   });
+   const response = {
+    service: "Busqueda de pais por lenguajes",
+    data: paises
+  };
+  // Se envía la respuesta al cliente
+  return res.send(response);
+})
 
 // Exportamos el router
 module.exports = router;
