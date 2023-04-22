@@ -111,17 +111,18 @@ router.get("/fechaIgualA", async (req, res) => {
 });
 
 /*---------------------------------------------------------------------*/ 
-router.get("/pais/:pais", (req, res) =>{
+router.get("/pais/:paises", (req, res) =>{
 
-  const pais = req.params.pais;
-  const books = data.dataLibrary.books.filter((book)=>{
-    return book.distributedCountries.includes(pais);
-  })
+  const paises = req.params.paises.split(",");
+  const datos = data.dataLibrary.books;
+  const books = datos.filter(book => paises.some(pais => book.distributedCountries.includes(pais)))
     const response ={
       books: books
     };
      return res.send(response);
   })
+/*---------------------------------------------------------------------*/ 
+  
   
 
 module.exports = router; // exporta el enrutador de Express para su uso en otras partes de la aplicación

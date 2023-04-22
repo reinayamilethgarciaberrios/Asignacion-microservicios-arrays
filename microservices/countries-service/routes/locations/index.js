@@ -94,14 +94,13 @@ router.get("/books/:capital", async (req, res) => {
   // Se envía la respuesta al cliente
   return res.send(response);
 });
-
+/*---------- endpoints para traer el pais por medio del lenguaje -------------*/
 router.get("/lenguaje/:pais", (req, res) =>{
    const lenguaje = req.params.pais;
    const paises = Object.values(data.dataLibrary.countries).filter(pais =>{
     return pais.languages.includes(lenguaje)
    });
    const response = {
-    service: "Busqueda de pais por lenguajes",
     data: paises
   };
   // Se envía la respuesta al cliente

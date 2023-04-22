@@ -58,17 +58,16 @@ router.get("/author/:name", (req, res) => {
   // Enviamos la respuesta
   return res.send(response);
 });
-/*---------------------------------------------------------------------*/ 
-router.get("/pais/:pais", (req, res) =>{
+/*------------------------Endpoint para traer autores por paises-------------------------*/
+router.get("/pais/:paises", (req, res) => {
 
-const pais = req.params.pais;
-const author = data.dataLibrary.authors.filter((author)=>{
-  return author.country.includes(pais);
-})
-  const response ={
-    author: author
+  const paises = req.params.paises.split(",");
+  const datos = data.dataLibrary.authors;
+  const authors = datos.filter(author => paises.some(pais => author.country.includes(pais)))
+  const response = {
+    author: authors
   };
-   return res.send(response);
+  return res.send(response);
 })
 
 // Exportamos el objeto Router
