@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "f22d7cf8-59ba-4320-9570-c68b231fbc78",
+		"name": "Asigancion-microservicios-arrays",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26435004"
+	},
+	"item": [
+		{
+			"name": "Busquedas-libros",
+			"item": [
+				{
+					"name": "Listar por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/books/author/William Shakespeare",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"books",
+								"author",
+								"William Shakespeare"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por fecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/books/fechas?fechaUno=1900&fechaDos=1930",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"books",
+								"fechas"
+							],
+							"query": [
+								{
+									"key": "fechaUno",
+									"value": "1900"
+								},
+								{
+									"key": "fechaDos",
+									"value": "1930"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar fecha mayor A",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/books/fechaMayorA?fechaMayor=1900",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"books",
+								"fechaMayorA"
+							],
+							"query": [
+								{
+									"key": "fechaMayor",
+									"value": "1900"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar fecha menor A",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/books/fechaMenorA?fechaMenor=1900",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"books",
+								"fechaMenorA"
+							],
+							"query": [
+								{
+									"key": "fechaMenor",
+									"value": "1900"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar fecha igual A",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/books/fechaIgualA?fechaIgual=1900",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"books",
+								"fechaIgualA"
+							],
+							"query": [
+								{
+									"key": "fechaIgual",
+									"value": "1900"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Busqueda-paises-capitales",
+			"item": [
+				{
+					"name": "Listar pais",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/countries/capital/Andorra la Vella",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"countries",
+								"capital",
+								"Andorra la Vella"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar autores por paises",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/countries/pais/London",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"countries",
+								"pais",
+								"London"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar libros por paises",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/countries/books/Buenos Aires",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"countries",
+								"books",
+								"Buenos Aires"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microservicio-language-service",
+			"item": [
+				{
+					"name": "Listar lenguajes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/languages/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"languages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar paises por lenguajes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/languages/paises/English",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"languages",
+								"paises",
+								"English"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar  autores por paises que hablan el idioma",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/languages/authors/English",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"languages",
+								"authors",
+								"English"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar libros distribuidos en los paises que hablen ese lenguaje",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/languages/libros/German",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"languages",
+								"libros",
+								"German"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
